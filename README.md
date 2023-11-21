@@ -17,8 +17,8 @@ Make sure you have [Docker](https://www.docker.com/) and [Docker Compose](https:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/yourusername/wordpress-dockerized.git
-   cd wordpress-dockerized
+   git clone https://github.com/younest9/wordpress-unattended.git
+   cd wordpress-unattended
    ```
 
 2. Customize environment variables:
