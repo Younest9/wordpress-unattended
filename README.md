@@ -76,3 +76,6 @@ docker volume create wordpress_data
 
 ## Acknowledgments
 This setup uses the [official WordPress image](https://hub.docker.com/_/wordpress) and the [jwilder/dockerize](https://github.com/jwilder/dockerize) script.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
