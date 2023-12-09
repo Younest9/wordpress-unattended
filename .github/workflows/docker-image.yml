@@ -15,10 +15,6 @@ jobs:
         steps:
           - name: Checkout the repository
             uses: actions/checkout@v3
-          - name: Change directory
-            run: |
-                cd .github/workflows
-                ls -la
           - name: Show the version
             env: 
                 DOCKER_IMAGE_VERSION: ${{ secrets.DOCKER_IMAGE_VERSION }}
