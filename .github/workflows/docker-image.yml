@@ -16,8 +16,8 @@ jobs:
           - name: Checkout the repository
             uses: actions/checkout@v3
           - name: Change directory
-            run: pwd
-          - name: Get the version
+            run: ls -la
+          - name: Show the version
             env: 
                 DOCKER_IMAGE_VERSION: ${{ secrets.DOCKER_IMAGE_VERSION }}
             run: |
