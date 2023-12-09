@@ -22,7 +22,7 @@ jobs:
             run: ./.github/scripts/version.sh
             id: get_version
           - name: Build the Docker image
-            run: docker build . --file Dockerfile --tag wordpress-unattended:${{ steps.get_version.outputs.DOCKER_IMAGE_VERSION }}
+            run: docker build . --file Dockerfile --tag wordpress-unattended:${{ secrets.DOCKER_IMAGE_VERSION }}
 
     push:
         needs: build
