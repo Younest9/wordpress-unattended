@@ -2,11 +2,7 @@
 
 # Read the current version from the GitHub repository secret
 CURRENT_VERSION=$(echo ${{ secrets.DOCKER_IMAGE_VERSION }})
-
-# If the version is not set, initialize it to 1.0.0
-if [ -z "$CURRENT_VERSION" ]; then
-  CURRENT_VERSION="1.0.0"
-fi
+echo "Current version: $CURRENT_VERSION"
 
 # Determine the type of version increment based on commit messages or other criteria
 # In this example, we check if there are any breaking changes, new features, or bug fixes
@@ -29,7 +25,7 @@ else
 fi
 
 # Print the new version
-echo "New version: $NEW_VERSION"
+echo "::set-output name=DOCKER_IMAGE_VERSION::$NEW_VERSION"
 
-# Update the GitHub repository secret with the new version
+# Set the new version to the GitHub repository secret $DOCKER_IMAGE_VERSION
 echo "DOCKER_IMAGE_VERSION=$NEW_VERSION" >> $GITHUB_ENV
