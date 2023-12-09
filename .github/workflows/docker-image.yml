@@ -55,7 +55,7 @@ jobs:
                 # Set the new version to the GitHub repository secret $DOCKER_IMAGE_VERSION
                 echo "DOCKER_IMAGE_VERSION=$NEW_VERSION" >> $GITHUB_ENV
           - name: Build the Docker image
-            run: docker build . --file Dockerfile --tag wordpress-unattended:v${{ secrets.DOCKER_IMAGE_VERSION }}
+            run: docker build . --file Dockerfile --tag wordpress-unattended:v$DOCKER_IMAGE_VERSION
 
     push:
         needs: build
