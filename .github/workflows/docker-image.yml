@@ -13,7 +13,10 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-          - uses: actions/checkout@v3
+          - name: Checkout the repository
+            uses: actions/checkout@v3
+          - name: Change directory
+            run: cd wordpress-unattended
           - name: Get the version
             env: 
                 DOCKER_IMAGE_VERSION: ${{ secrets.DOCKER_IMAGE_VERSION }}
