@@ -21,9 +21,8 @@ jobs:
                 echo "Current version: $DOCKER_IMAGE_VERSION"
           - name: Get the version
             run: |
-                cd .github/workflows
-                chmod +x version.sh
-                ./version.sh
+                chmod +x .github/workflows/version.sh
+                .github/workflows/version.sh
           - name: Build the Docker image
             run: docker build . --file Dockerfile --tag wordpress-unattended:v$DOCKER_IMAGE_VERSION
 
