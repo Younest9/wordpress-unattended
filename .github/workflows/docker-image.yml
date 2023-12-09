@@ -8,19 +8,29 @@ on:
 
 jobs:
 
-  build:
+    build:
 
-    runs-on: ubuntu-latest
+        runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Setup the versionning script
-      run: |
-        cd .github/scripts
-        chmod +x version.sh
-    - name: Get the version
-      run: ./.github/scripts/version.sh
-      id: get_version
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag wordpress-unattended:${{ steps.get_version.outputs.DOCKER_IMAGE_VERSION }}
+        steps:
+          - uses: actions/checkout@v3
+          - name: Setup the versionning script
+            run: |
+                cd .github/scripts
+                chmod +x version.sh
+          - name: Get the version
+            run: ./.github/scripts/version.sh
+            id: get_version
+          - name: Build the Docker image
+            run: docker build . --file Dockerfile --tag wordpress-unattended:${{ steps.get_version.outputs.DOCKER_IMAGE_VERSION }}
 
+    push:
+        needs: build
+    
+        runs-on: ubuntu-latest
+    
+        steps:
+            - name: Push the Docker image
+              run: |
+                    echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+                    docker push wordpress-unattended:${{ secrets.DOCKER_IMAGE_VERSION }}
