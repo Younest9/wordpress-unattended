@@ -4,11 +4,6 @@
 CURRENT_VERSION=$(echo ${{ secrets.DOCKER_IMAGE_VERSION }})
 echo "Current version: $CURRENT_VERSION"
 
-if [ -z "$CURRENT_VERSION" ]; then
-  # No version found, default to 0.0.0
-  CURRENT_VERSION="0.0.0"
-fi
-
 # Determine the type of version increment based on commit messages or other criteria
 # In this example, we check if there are any breaking changes, new features, or bug fixes
 BREAKING_CHANGES=$(git log --format=%B -n 1 | grep -i -e 'MAJOR' -e 'BREAKING' -e 'BREAKS' -e 'BREAK' -e 'BREAKS' -e 'BREAKING CHANGE' -e 'BREAKING CHANGES')
