@@ -32,5 +32,4 @@ fi
 echo "New version: $NEW_VERSION"
 
 # Update the GitHub repository secret with the new version
-echo "::set-env name=DOCKER_IMAGE_VERSION::$NEW_VERSION"
-echo "::add-mask::$NEW_VERSION"  # Mask the new version in the GitHub Actions logs
+echo "DOCKER_IMAGE_VERSION=$NEW_VERSION" >> $GITHUB_ENV
