@@ -14,10 +14,8 @@ jobs:
 
         steps:
           - uses: actions/checkout@v3
-          - name: Setup the versionning script
-            run: |
-                cd .github/scripts
-                chmod +x version.sh
+          - name: Get the version
+            run: echo {{ secrets.DOCKER_IMAGE_VERSION }}
           - name: Get the version
             run: |
                 #!/bin/bash
