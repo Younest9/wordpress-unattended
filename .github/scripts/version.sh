@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Read the current version from the GitHub repository secret
-MAJOR=$(echo ${{ secrets.DOCKER_IMAGE_VERSION_MAJOR}})
-MINOR=$(echo ${{ secrets.DOCKER_IMAGE_VERSION_MINOR}})
-PATCH=$(echo ${{ secrets.DOCKER_IMAGE_VERSION_PATCH}})
+MAJOR=$(echo $DOCKER_IMAGE_VERSION_MAJOR)
+MINOR=$(echo $DOCKER_IMAGE_VERSION_MINOR)
+PATCH=$(echo $DOCKER_IMAGE_VERSION_PATCH)
 
 # Determine the type of version increment based on commit messages or other criteria
 # In this example, we check if there are any breaking changes, new features, or bug fixes

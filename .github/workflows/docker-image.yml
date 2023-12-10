@@ -21,6 +21,10 @@ jobs:
             run: |
                 echo "Current version: $DOCKER_IMAGE_VERSION"
           - name: Get the version
+            env:
+                DOCKER_IMAGE_VERSION_MAJOR: ${{ secrets.DOCKER_IMAGE_VERSION_MAJOR }}
+                DOCKER_IMAGE_VERSION_MINOR: ${{ secrets.DOCKER_IMAGE_VERSION_MINOR }}
+                DOCKER_IMAGE_VERSION_PATCH: ${{ secrets.DOCKER_IMAGE_VERSION_PATCH }}
             run: |
                 chmod +x .github/scripts/version.sh
                 ./.github/scripts/version.sh
