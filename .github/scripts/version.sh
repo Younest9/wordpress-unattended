@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Read the current version from the GitHub repository secret
-CURRENT_VERSION=$(echo ${{ secrets.DOCKER_IMAGE_VERSION }})
-echo "Current version: $CURRENT_VERSION"
+MAJOR=$(echo ${{ secrets.DOCKER_IMAGE_VERSION_MAJOR}}
+MINOR=$(echo ${{ secrets.DOCKER_IMAGE_VERSION_MINOR}}
+PATCH=$(echo ${{ secrets.DOCKER_IMAGE_VERSION_PATCH}}
 
 # Determine the type of version increment based on commit messages or other criteria
 # In this example, we check if there are any breaking changes, new features, or bug fixes
@@ -12,17 +13,20 @@ BUG_FIXES=$(git log --format=%B -n 1 | grep -i -e 'PATCH' -e 'FIX ' -e 'FIXES ' 
 # Determine the version increment based on the detected changes
 if [ -n "$BREAKING_CHANGES" ]; then
   # Increment MAJOR for breaking changes
-  NEW_VERSION=$(echo $CURRENT_VERSION | awk -F. '{print $1+1 ".0.0"}')
+  MAJOR=$MAJOR+1
 elif [ -n "$NEW_FEATURES" ]; then
   # Increment MINOR for new features
-  NEW_VERSION=$(echo $CURRENT_VERSION | awk -F. '{print $1 "." $2+1 ".0"}')
+  MINOR=$MINOR+1
 elif [ -n "$BUG_FIXES" ]; then
   # Increment PATCH for bug fixes
-  NEW_VERSION=$(echo $CURRENT_VERSION | awk -F. '{print $1 "." $2 "." $3+1}')
+  PATCH=$PATCH+1
 else
-  # No specific changes detected, default to incrementing PATCH
-  NEW_VERSION=$(echo $CURRENT_VERSION | awk -F. '{print $1+1 "." $2 "." $3}')
+  # No specific changes detected, default to incrementing MINOR
+  MINOR=$MINOR+1
 fi
 
 # Set the new version to the GitHub repository secret $DOCKER_IMAGE_VERSION
-echo "DOCKER_IMAGE_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+NEW_VERSION=$MAJOR.$MINOR.$PATCH
+echo "DOCKER_IMAGE_VERSION.MAJOR=$MAJOR" >> $GITHUB_ENV
+echo "DOCKER_IMAGE_VERSION.MINOR=$MINOR" >> $GITHUB_ENV
+echo "DOCKER_IMAGE_VERSION.PATCH=$PATCH" >> $GITHUB_ENV
